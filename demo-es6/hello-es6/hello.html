@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    for(let i = 0; i < 5; i++){
+        console.log(i);
+    }
+    //console.log("循环外：" + i)
+
+    function add(a , b) {
+        // 判断b是否为空，为空就给默认值1
+        b = b || 1;
+        return a + b;
+    }
+    // 传一个参数
+    console.log(add(10));
+
+    function add(a , b = 1) {
+        return a + b;
+    }
+    // 传一个参数
+    console.log(add(10));
+
+    let fun2 = (i,j) => {
+        console.log(i);
+        console.log(j);
+        console.log(i+j);
+    }
+
+    fun2(100, 200)
+
+    const person = {
+        name: "zhangsan",
+        eat: function (food) {
+            console.log(this.name + "恰了" + food);
+        },
+        eat2: food => console.log(person.name + "恰了" + food),//域不一样
+        eat3(food){
+            console.log(this.name + "恰了" + food)
+        }
+    }
+    person.eat("鸡蛋")
+    person.eat2("面条")
+    person.eat3("筷子")
+
+    const p = {
+        name: "lisi",
+        age: 30
+    }
+    // const fun3 = pp => console.log(pp.name);
+    // fun3(p);
+    const fun3 = ({name,age}) => console.log(name, age);
+    fun3(p);
+
+    let arr = ['1','20','-5','3'];
+    console.log(arr)
+
+    arr = arr.map(s => parseInt(s));
+    console.log(arr)
+    arr = arr.map(s => s * 10);
+    console.log(arr)
+
+
+</script>
+</html>

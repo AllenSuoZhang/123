@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <input type="checkbox" v-model="language" value="Java" />Java<br/>
+    <input type="checkbox" v-model="language" value="PHP" />PHP<br/>
+    <input type="checkbox" v-model="language" value="Swift" />Swift<br/>
+    你选择了：{{language.join(',')}}
+    <hr>
+
+    <!--双向绑定，v-model: 数据模型-->
+    <input type="text" v-model="num" @keyup.enter="submit">
+    <!-- v-on：事件名=js表达式 -->
+    <button v-on:click="num++">点我</button>
+    <input type="button" value="不点" v-on:click="num++">
+    <input type="button" value="不点试试" v-on:click="incr">
+    <!--右击事件，并阻止默认事件发生-->
+    <input type="button" value="不点试试2-1" v-on:contextMenu.prevent="incr">
+    <input type="button" value="不点试试2-2" @contextMenu.prevent="incr">
+    <!--右击事件，不阻止默认事件发生-->
+    <input type="button" value="不点试试3-1" v-on:contextMenu="incr($event)">
+    <input type="button" value="不点试试3-2" @contextMenu="incr($event)">
+    <!--花括号：js表达式 -->
+    <h1>{{name}}，非常帅！！！有{{num}}位女神为他着迷。</h1>
+
+    <br>
+    <ul>
+        <li v-for="user in users">
+            {{user.name}} - {{user.gender}} - {{user.age}}
+        </li>
+    </ul>
+    <br>
+    <ul>
+        <li v-for="(user, index) in users" :key="index">
+            {{index + 1}}. {{user.name}} - {{user.gender}} - {{user.age}}
+        </li>
+    </ul>
+    <br>
+    <ul>
+        <li v-for="(value, key, index) in user" :key="index">
+            {{index + 1}}. {{key}} - {{value}}
+        </li>
+    </ul>
+    <br>
+
+</div>
+</body>
+<script src="node_modules/vue/dist/vue.js"></script>
+<script>
+    // 创建vue实例
+    const app = new Vue({
+        el:"#app", // el即element，该vue实例要渲染的页面元素
+        data:{ // 渲染页面需要的数据
+            name: "凡哥",
+            num: 100,
+            language: [],
+            users:[
+                {name:'柳岩', gender:'女', age: 21},
+                {name:'峰哥', gender:'男', age: 18},
+                {name:'范冰冰', gender:'女', age: 24},
+                {name:'刘亦菲', gender:'女', age: 18},
+                {name:'古力娜扎', gender:'女', age: 25}
+            ],
+            user:{name:'柳岩', gender:'女', age: 21}
+        },
+        methods:{
+            incr(){
+                this.num++;
+                console.log(this)
+            },
+            add(){
+                this.num--;
+            },
+            submit() {
+                console.log("你已经提交了")
+            }
+        },
+        created: function () {
+            this.num = 10000;
+        }
+    });
+</script>
+</html>
